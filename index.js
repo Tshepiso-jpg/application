@@ -55,14 +55,20 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Paris");
 
+function displayForecast() {
+let forecastElement = document.querySelector(".weather-forecast");
 
-let forecast= document.querySelector(".weather-forecast");
+let days= ['Tue','Wed','Thu','Fri','Sat'];
 
- forecast.innerHTML =`
+let forecastHtml= "";
+
+days.forEach(function(day) {
+  forecastHtml = 
+  forecastHtml+
+  `
    <div class="weather-forecast">
-     "<div class="weather-forecast-date">Thu</div>
+     "<div class="weather-forecast-date">${day}</div>
      <div class="forecast-icon">⛅</div>
      <div class="future-forecast-temperature">
        <span class="max">
@@ -70,5 +76,18 @@ let forecast= document.querySelector(".weather-forecast");
        </span>
        <span class="min"> 12&deg;</span>
      </div>
-   </div>`;
+   </div> `;
+
+});
+
+forecastElement.innerHTML= forecastHtml;
+
+}
+
+searchCity("Paris");
+
+displayForecast();
+
+
+
 
