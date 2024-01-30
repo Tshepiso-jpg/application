@@ -58,14 +58,17 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 searchCity("Paris");
 
 
-forecast.innerHTML='
-     <div class="weather-forecast">
-        <div class="weather-forecast-date">Thu</div>
-        <div class="forecast-icon">⛅</div>
-        <div class="future-forecast-temperature">
-  <span class="max"><strong> 18 &deg;</strong> </span> 
-  <span class="min">12 &deg;</span>
-</div>
-</div>
-';
+let forecast= document.querySelector(".weather-forecast");
+
+ forecast.innerHTML =`
+   <div class="weather-forecast">
+     "<div class="weather-forecast-date">Thu</div>
+     <div class="forecast-icon">⛅</div>
+     <div class="future-forecast-temperature">
+       <span class="max">
+         <strong> 18 &deg;</strong>
+       </span>
+       <span class="min"> 12&deg;</span>
+     </div>
+   </div>`;
 
