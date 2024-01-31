@@ -67,8 +67,8 @@ days.forEach(function(day) {
   forecastHtml = 
   forecastHtml+
   `
-   <div class="weather-forecast">
-     "<div class="weather-forecast-date">${day}</div>
+   <div class="forecast-day">
+     <div class="weather-forecast-date">${day}</div>
      <div class="forecast-icon">⛅</div>
      <div class="future-forecast-temperature">
        <span class="max">
@@ -85,8 +85,10 @@ forecastElement.innerHTML= forecastHtml;
 }
 
 searchCity("Paris");
-
 displayForecast();
+
+
+
 
 
 
