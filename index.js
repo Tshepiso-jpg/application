@@ -18,6 +18,8 @@ function refreshWeather(response) {
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 }
 
+getForecast(response.data.city);
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -41,7 +43,7 @@ function formatDate(date) {
 
 function searchCity(city) {
   let apiKey = "b2a5adcct04b33178913oc335f405433";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -55,37 +57,48 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-
-function displayForecast() {
-let forecastElement = document.querySelector(".weather-forecast");
-
-let days= ['Tue','Wed','Thu','Fri','Sat'];
-
-let forecastHtml= "";
-
-days.forEach(function(day) {
-  forecastHtml = 
-  forecastHtml+
-  `
-   <div class="forecast-day">
-     <div class="weather-forecast-date">${day}</div>
-     <div class="forecast-icon">⛅</div>
-     <div class="future-forecast-temperature">
-       <span class="max">
-         <strong> 18 &deg;</strong>
-       </span>
-       <span class="min"> 12&deg;</span>
-     </div>
-   </div> `;
-
-});
-
-forecastElement.innerHTML= forecastHtml;
+function getForecast(city){
+  let apiKey = "39od5174ba4e9a0597438tbcfb4b29d6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 
 }
 
+
+
+
+function displayForecast( response) {
+
+  console.log(response.data);
+  let forecastElement = document.querySelector(".weather-forecast");
+
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  let forecastHtml = "";
+
+  response.data.daily.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+   <div class="forecast-day">
+     <div class="weather-forecast-date"></div>
+     <div class="forecast-icon">⛅</div>
+     <div class="future-forecast-temperature">
+       <span class="max">
+         <strong>${Math.round(day.temperature.maximum)} &deg;</strong>
+       </span>
+       <span class="min">${Math.round(day.temperature.minimum)}&deg;</span>
+     </div>
+   </div> `;
+  });
+
+  forecastElement.innerHTML = forecastHtml;
+}
+
 searchCity("Paris");
-displayForecast();
+
+
+
 
 
 
